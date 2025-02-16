@@ -49,7 +49,7 @@ LikeButton.propTypes = {
   count: PropTypes.number.isRequired,
 };
 
-const StarIcon = ({ filled }) => (
+const StarIcon = ({ filled = false }) => (
   <svg
     className="review-card__star"
     viewBox="0 0 24 24"
@@ -62,11 +62,7 @@ const StarIcon = ({ filled }) => (
 );
 
 StarIcon.propTypes = {
-  filled: PropTypes.bool.isRequired,
-};
-
-StarIcon.defaultProps = {
-  filled: false,
+  filled: PropTypes.bool,
 };
 
 const Reviews = () => {
@@ -74,7 +70,6 @@ const Reviews = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1200);
 
-  // Обновленный массив отзывов с поддержкой WebP
   const reviews = [
     {
       id: 1,

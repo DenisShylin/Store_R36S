@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Footer.css"; // импорт стилей футера
+import "./Footer.css";
 import PartnershipModal from "./PartnershipModal/PartnershipModal";
 
 const Footer = () => {
@@ -26,8 +26,8 @@ const Footer = () => {
                   className="social__link"
                 >
                   <img
-                    src="/src/assets/icons/aliexpress_logo_icon_167892.ico"
-                    alt="Социальная сеть"
+                    src="/AliExpress.ico"
+                    alt="AliExpress Store"
                     className="social__icon"
                   />
                 </a>

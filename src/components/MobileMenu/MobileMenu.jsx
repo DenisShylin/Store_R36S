@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import "./MobileMenu.css";
 
-const MobileMenu = ({ isOpen, onClose }) => {
+const MobileMenu = ({ isOpen = false, onClose }) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -73,20 +73,22 @@ const MobileMenu = ({ isOpen, onClose }) => {
     },
   ];
 
+  if (!isOpen) return null;
+
   return (
     <div
       className={`mobile-menu ${isOpen ? "open" : ""}`}
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
-      aria-hidden={!isOpen}
+      aria-label="Mobile navigation menu"
     >
       <div className="mobile-menu__background" />
       <div className="mobile-menu__container">
         <button
           className="mobile-menu__close-btn"
           onClick={onClose}
-          aria-label="Закрыть меню"
+          aria-label="Close menu"
         >
           <X size={24} />
         </button>
@@ -112,19 +114,15 @@ const MobileMenu = ({ isOpen, onClose }) => {
             ))}
           </ul>
         </nav>
-        <div className="mobile-menu__footer">© 2024 R36S. Official website</div>
+        <div className="mobile-menu__footer">© 2025 R36S. Official website</div>
       </div>
     </div>
   );
 };
 
 MobileMenu.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
-};
-
-MobileMenu.defaultProps = {
-  isOpen: false,
 };
 
 export default MobileMenu;

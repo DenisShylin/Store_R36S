@@ -136,7 +136,7 @@ const Products = () => {
               Critical Note: With any flashing method, always double-check your target device selection to avoid accidental data loss on other drives.`,
               images: {
                 jpg: "/src/assets/img/products/i_5_1x.jpg",
-                webp: "//src/assets/img/products/i_5_1x.webp",
+                webp: "/src/assets/img/products/i_5_1x.webp",
               },
             },
           },

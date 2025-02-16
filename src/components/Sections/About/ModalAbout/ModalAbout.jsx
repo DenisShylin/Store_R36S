@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "./ModalAbout.css";
 
-const ModalAbout = ({ feature, onClose }) => {
+const ModalAbout = ({ feature = null, onClose }) => {
   const [isVideo, setIsVideo] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -134,6 +134,7 @@ const ModalAbout = ({ feature, onClose }) => {
                 <span style={{ fontSize: "24px" }}>US</span>
               </span>
             </div>
+
             <a
               href="https://www.aliexpress.com/item/1005007171465465.html"
               className="modal-about-button modal-about-button--primary"
@@ -164,10 +165,6 @@ ModalAbout.propTypes = {
     fullDescription: PropTypes.string,
   }),
   onClose: PropTypes.func.isRequired,
-};
-
-ModalAbout.defaultProps = {
-  feature: null,
 };
 
 export default ModalAbout;
