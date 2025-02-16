@@ -1,0 +1,425 @@
+.guide {
+    position: relative;
+    background-color: #0F172A;
+    background-image: radial-gradient(at 50% 0%, rgba(37, 99, 235, 0.1) 0px, transparent 50%);
+    color: #fff;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 80px 0;
+}
+
+.guide-background {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 1) 100%);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+}
+
+/* Навигация */
+.nav {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 24px;
+    backdrop-filter: blur(10px);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.nav-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #22C55E;
+}
+
+.nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    text-align: left;
+    width: 100%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.nav-item:hover {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22C55E;
+}
+
+.nav-item-active {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22C55E;
+}
+
+.nav-icon {
+    width: 16px;
+    height: 16px;
+}
+
+/* Основной контент */
+.main {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 32px;
+    backdrop-filter: blur(10px);
+}
+
+.title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 40px;
+}
+
+.section {
+    margin-bottom: 48px;
+}
+
+/* Текстовый контент */
+.text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+.text-content p {
+    margin-bottom: 16px;
+    max-width: 800px;
+}
+
+.text-content ul {
+    list-style-type: none;
+    padding-left: 24px;
+    margin-bottom: 16px;
+}
+
+.text-content ul li {
+    position: relative;
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.text-content ul li::before {
+    content: "•";
+    color: #22C55E;
+    position: absolute;
+    left: -20px;
+    top: 0;
+}
+
+.subsection {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.subsection-title {
+    color: #22C55E;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.subsection-content {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Подсветка важного текста */
+.text-content strong,
+.text-content b {
+    color: #22C55E;
+    font-weight: 600;
+}
+
+/* Заголовки в тексте */
+.text-content h3 {
+    color: #22C55E;
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
+
+.text-content h4 {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+/* Код и технические термины */
+.text-content code {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22C55E;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+/* Предупреждения и заметки */
+.text-content .warning {
+    background: rgba(234, 179, 8, 0.1);
+    border-left: 4px solid #EAB308;
+    padding: 16px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.text-content .note {
+    background: rgba(34, 197, 94, 0.1);
+    border-left: 4px solid #22C55E;
+    padding: 16px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Динамические секции */
+.dynamic-sections .section {
+    display: none;
+}
+
+.dynamic-sections .section-active {
+    display: block;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Карточки загрузок */
+.download-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.download-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.download-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+.download-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.download-icon {
+    color: #22C55E;
+    width: 24px;
+    height: 24px;
+}
+
+.download-filename {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.download-meta {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.download-button {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22C55E;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.download-button:hover {
+    background: rgba(34, 197, 94, 0.2);
+}
+
+.button-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.image-container {
+    margin: 24px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.section-image,
+.subsection-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    object-fit: contain;
+}
+
+.section-image:hover,
+.subsection-image:hover {
+    transform: scale(1.02);
+}
+
+/* Media queries for responsive images */
+@media (max-width: 1024px) {
+    .image-container {
+        margin: 20px 0;
+        max-width: 100%;
+    }
+
+    .section-image,
+    .subsection-image {
+        width: 90%;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .image-container {
+        margin: 16px 0;
+    }
+
+    .section-image,
+    .subsection-image {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .image-container {
+        margin: 12px 0;
+    }
+
+    .section-image,
+    .subsection-image {
+        width: 100%;
+    }
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Медиа-запросы */
+@media (max-width: 1024px) {
+    .content {
+        grid-template-columns: 1fr;
+    }
+
+    .nav {
+        position: relative;
+        top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .guide {
+        padding: 40px 0;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    .main {
+        padding: 20px;
+    }
+
+    .download-card {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+
+    .download-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .download-button {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .nav {
+        padding: 16px;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .nav-item {
+        padding: 8px 12px;
+    }
+
+    .text-content {
+        font-size: 15px;
+    }
+
+    .subsection {
+        padding: 16px;
+    }
+}

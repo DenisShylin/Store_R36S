@@ -1,0 +1,188 @@
+.partnership-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(15, 23, 42, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.partnership-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.partnership-modal-content {
+    background-color: #0F172A;
+    background-image:
+        radial-gradient(at 0% 100%, rgba(37, 99, 235, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(255, 51, 102, 0.1) 0px, transparent 50%);
+    border-radius: 12px;
+    padding: 32px;
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.partnership-modal-content.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.partnership-modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.partnership-modal-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.partnership-modal-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.partnership-modal-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.partnership-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: #94A3B8;
+    cursor: pointer;
+    padding: 8px;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.partnership-modal-close:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+}
+
+.partnership-modal-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 24px;
+    text-align: center;
+    background: linear-gradient(135deg, #fff 0%, #94A3B8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.partnership-section {
+    margin-bottom: 32px;
+    animation: fadeIn 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.partnership-section:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.partnership-section:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.partnership-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #60A5FA;
+    margin-bottom: 16px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.partnership-section-title-1 {
+
+    color: #f3f2f2;
+}
+
+.partnership-section-title-2 {
+    color: #f3f2f2;
+}
+
+.partnership-text {
+    color: #94A3B8;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.partnership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.partnership-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.partnership-card:hover {
+    transform: translateY(-4px);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.partnership-link {
+    color: #60A5FA;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.partnership-link:hover {
+    color: #3b82f6;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .partnership-modal-content {
+        padding: 24px;
+        width: 95%;
+    }
+
+    .partnership-modal-title {
+        font-size: 20px;
+    }
+
+    .partnership-grid {
+        grid-template-columns: 1fr;
+    }
+}

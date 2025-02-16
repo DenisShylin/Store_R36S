@@ -1,0 +1,85 @@
+/* src/project/css/media.css */
+/* Desktop First подход */
+
+/* Large Desktop (>1280px) */
+@media (min-width: 1281px) {
+    .container {
+        max-width: 1280px;
+    }
+}
+
+/* Desktop (1024px - 1280px) */
+@media (max-width: 1280px) {
+    .container {
+        max-width: 1024px;
+    }
+}
+
+/* Tablet Landscape (768px - 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 768px;
+    }
+
+    .grid-container {
+        gap: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+}
+
+/* Tablet Portrait (576px - 768px) */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .card {
+        padding: 1.25rem;
+    }
+}
+
+/* Mobile (<576px) */
+@media (max-width: 576px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .grid-container {
+        gap: 1rem;
+    }
+
+    .button {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Обеспечение корректного отображения на мобильных устройствах */
+@media screen and (max-width: 320px) {
+    html {
+        font-size: 14px;
+        /* Уменьшаем базовый размер шрифта */
+    }
+}
+
+/* Для устройств с высоким DPI */
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    /* Стили для retina дисплеев */
+}
+
+/* Для предотвращения горизонтального скролла на всех устройствах */
+html,
+body {
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+}
