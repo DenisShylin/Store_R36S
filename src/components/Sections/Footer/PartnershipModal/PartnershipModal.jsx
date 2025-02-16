@@ -1,4 +1,5 @@
 import { X } from "lucide-react";
+import PropTypes from "prop-types";
 import "./PartnershipModal.css";
 
 const PartnershipModal = ({ isOpen, onClose }) => {
@@ -155,6 +156,15 @@ const PartnershipModal = ({ isOpen, onClose }) => {
       </div>
     </div>
   );
+};
+
+PartnershipModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
+
+PartnershipModal.defaultProps = {
+  isOpen: false,
 };
 
 export default PartnershipModal;

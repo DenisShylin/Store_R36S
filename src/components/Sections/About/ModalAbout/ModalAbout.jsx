@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import "./ModalAbout.css";
 
 const ModalAbout = ({ feature, onClose }) => {
   const [isVideo, setIsVideo] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Массив изображений для карусели (только для карточки с цветами)
   const colorImages = [
     "/src/assets/img/modal/Untitled_1_1x.jpg",
     "/src/assets/img/modal/Untitled_2_1x.jpg",
@@ -14,8 +14,9 @@ const ModalAbout = ({ feature, onClose }) => {
   ];
 
   useEffect(() => {
-    // Проверяем, является ли источник видео файлом
     const checkIsVideo = () => {
+      if (!feature?.imageUrl) return false;
+
       const videoExtensions = [".mp4", ".MP4", ".webm", ".ogg"];
       return videoExtensions.some((ext) =>
         feature.imageUrl.toLowerCase().endsWith(ext)
@@ -23,7 +24,7 @@ const ModalAbout = ({ feature, onClose }) => {
     };
 
     setIsVideo(checkIsVideo());
-  }, [feature.imageUrl]);
+  }, [feature?.imageUrl]);
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -43,10 +44,9 @@ const ModalAbout = ({ feature, onClose }) => {
     };
   }, []);
 
-  // Эффект для автоматической смены изображений
   useEffect(() => {
     let interval;
-    if (feature.title === "Extensive color selection") {
+    if (feature?.title === "Extensive color selection") {
       interval = setInterval(() => {
         setCurrentImageIndex((prevIndex) =>
           prevIndex === colorImages.length - 1 ? 0 : prevIndex + 1
@@ -54,9 +54,11 @@ const ModalAbout = ({ feature, onClose }) => {
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [feature.title]);
+  }, [feature?.title]);
 
   const renderMedia = () => {
+    if (!feature) return null;
+
     if (feature.title === "Extensive color selection") {
       return (
         <img
@@ -67,7 +69,7 @@ const ModalAbout = ({ feature, onClose }) => {
       );
     }
 
-    if (isVideo) {
+    if (isVideo && feature.imageUrl) {
       return (
         <video
           className="modal-about-image"
@@ -83,14 +85,18 @@ const ModalAbout = ({ feature, onClose }) => {
       );
     }
 
-    return (
+    return feature.imageUrl ? (
       <img
         src={feature.imageUrl}
-        alt={feature.imageAlt}
+        alt={feature.imageAlt || "Feature image"}
         className="modal-about-image"
       />
-    );
+    ) : null;
   };
+
+  if (!feature) {
+    return null;
+  }
 
   return (
     <div className="modal-about-overlay" onClick={onClose}>
@@ -147,6 +153,21 @@ const ModalAbout = ({ feature, onClose }) => {
       </div>
     </div>
   );
+};
+
+ModalAbout.propTypes = {
+  feature: PropTypes.shape({
+    imageUrl: PropTypes.string,
+    imageAlt: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    icon: PropTypes.node,
+    fullDescription: PropTypes.string,
+  }),
+  onClose: PropTypes.func.isRequired,
+};
+
+ModalAbout.defaultProps = {
+  feature: null,
 };
 
 export default ModalAbout;

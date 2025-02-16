@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 import {
   Gamepad2,
   Laptop2,
@@ -115,6 +116,15 @@ const MobileMenu = ({ isOpen, onClose }) => {
       </div>
     </div>
   );
+};
+
+MobileMenu.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
+
+MobileMenu.defaultProps = {
+  isOpen: false,
 };
 
 export default MobileMenu;

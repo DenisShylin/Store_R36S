@@ -1,11 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-import heroImage1x from "../../../assets/img/hero/image_1x.png";
-import heroImage2x from "../../../assets/img/hero/image_2x.png";
+import heroImage1x from "../../../assets/img/hero/hero1_1x_.png";
+import heroImage2x from "../../../assets/img/hero/hero1_2x_.png";
 import "./Hero.css";
 
 const Hero = () => {
   const titleRef = useRef(null);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1280);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth > 1280;
+    }
+    return true;
+  });
 
   const desktopDescription =
     "Discover the world of retro gaming with the R36S portable console. 15,000+ classic games, a powerful processor and a bright IPS screen - everything for an unforgettable gaming adventure!";
@@ -13,6 +19,15 @@ const Hero = () => {
     "Relive gaming history in the palm of your hands with the R36S";
 
   useEffect(() => {
+    const preloadImages = () => {
+      const img1 = new Image();
+      const img2 = new Image();
+      img1.src = heroImage1x;
+      img2.src = heroImage2x;
+      img1.onload = () => setImageLoaded(true);
+    };
+    preloadImages();
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -40,14 +55,14 @@ const Hero = () => {
 
   const handleBuyClick = () => {
     window.open(
-      "https://www.aliexpress.com/item/1005007171465465.html?spm=a2g0o.store_pc_home.0.0.70583a88IDCuNJ&pdp_npi=4%40dis%21UAH%214%C2%A0485%2C21%20%D0%B3%D1%80%D0%BD.%211%C2%A0472%2C53%20%D0%B3%D1%80%D0%BD.%21%21%21767.45%21251.96%21%40211b498b17390151033607761d21d7%2112000039694115852%21sh%21UA%211927913003%21X",
+      "https://www.aliexpress.com/item/1005007171465465.html",
       "_blank",
       "noopener,noreferrer"
     );
   };
 
   return (
-    <section className="hero">
+    <section className={`hero ${imageLoaded ? "hero--loaded" : ""}`}>
       <div className="hero__background">
         <div className="hero__overlay"></div>
       </div>
@@ -60,6 +75,7 @@ const Hero = () => {
               <source
                 media="(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)"
                 srcSet={heroImage2x}
+                type="image/png"
               />
               <img
                 src={heroImage1x}
@@ -69,6 +85,7 @@ const Hero = () => {
                 width="600"
                 height="400"
                 loading="eager"
+                onLoad={() => setImageLoaded(true)}
               />
             </picture>
           </div>
@@ -88,8 +105,8 @@ const Hero = () => {
               <div className="hero__price-wrapper">
                 <span className="hero__original-price">US $108.06</span>
                 <span className="hero__current-price">
-                  US 35.48
-                  <span style={{ fontSize: "24px" }}>$</span>
+                  $35.48
+                  <span style={{ fontSize: "24px" }}>US</span>
                 </span>
               </div>
               <span className="hero__discount-badge">-68%</span>
