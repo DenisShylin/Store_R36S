@@ -344,7 +344,7 @@
     }
 }
 
-/* Медиа-запросы */
+/* Медиа-запросы для модального окна */
 @media (max-width: 768px) {
     .modal-about-content {
         max-height: 72vh;
