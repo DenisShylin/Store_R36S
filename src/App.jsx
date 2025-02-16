@@ -13,6 +13,16 @@ import Reviews from "./components/Sections/Reviews/Reviews";
 import Contact from "./components/Sections/Contact/Contact";
 import Footer from "./components/Sections/Footer/Footer";
 
+// Компонент для страницы 404
+const NotFound = () => {
+  return (
+    <div className="not-found">
+      <h1>404</h1>
+      <p>Page not found</p>
+    </div>
+  );
+};
+
 function App() {
   return (
     <Router>
@@ -36,6 +46,9 @@ function App() {
         {/* Здесь можно добавить другие маршруты */}
         {/* <Route path="/about" element={<AboutPage />} /> */}
         {/* <Route path="/products" element={<ProductsPage />} /> */}
+
+        {/* Обработка несуществующих маршрутов */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </Router>

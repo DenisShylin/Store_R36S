@@ -27,7 +27,7 @@
     gap: 40px;
 }
 
-/* Навигация */
+/* Navigation */
 .nav {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
@@ -36,6 +36,13 @@
     height: fit-content;
     position: sticky;
     top: 20px;
+}
+
+.nav-mobile {
+    position: relative;
+    top: 0;
+    margin-bottom: 24px;
+    z-index: 10;
 }
 
 .nav-title {
@@ -82,7 +89,7 @@
     height: 16px;
 }
 
-/* Основной контент */
+/* Main Content */
 .main {
     background: rgba(255, 255, 255, 0.03);
     border-radius: 16px;
@@ -99,9 +106,10 @@
 
 .section {
     margin-bottom: 48px;
+    scroll-margin-top: 20px;
 }
 
-/* Текстовый контент */
+/* Text Content */
 .text-content {
     display: flex;
     flex-direction: column;
@@ -155,14 +163,14 @@
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* Подсветка важного текста */
+/* Important Text Highlighting */
 .text-content strong,
 .text-content b {
     color: #22C55E;
     font-weight: 600;
 }
 
-/* Заголовки в тексте */
+/* Text Headings */
 .text-content h3 {
     color: #22C55E;
     font-size: 22px;
@@ -179,7 +187,7 @@
     margin-bottom: 12px;
 }
 
-/* Код и технические термины */
+/* Code and Technical Terms */
 .text-content code {
     background: rgba(34, 197, 94, 0.1);
     color: #22C55E;
@@ -188,7 +196,7 @@
     font-family: monospace;
 }
 
-/* Предупреждения и заметки */
+/* Warnings and Notes */
 .text-content .warning {
     background: rgba(234, 179, 8, 0.1);
     border-left: 4px solid #EAB308;
@@ -205,7 +213,7 @@
     border-radius: 0 8px 8px 0;
 }
 
-/* Динамические секции */
+/* Dynamic Sections */
 .dynamic-sections .section {
     display: none;
 }
@@ -215,7 +223,7 @@
     animation: fadeIn 0.5s ease-out forwards;
 }
 
-/* Карточки загрузок */
+/* Download Cards */
 .download-list {
     display: flex;
     flex-direction: column;
@@ -278,6 +286,7 @@
     height: 20px;
 }
 
+/* Images */
 .image-container {
     margin: 24px 0;
     border-radius: 12px;
@@ -300,44 +309,7 @@
     transform: scale(1.02);
 }
 
-/* Media queries for responsive images */
-@media (max-width: 1024px) {
-    .image-container {
-        margin: 20px 0;
-        max-width: 100%;
-    }
-
-    .section-image,
-    .subsection-image {
-        width: 90%;
-        margin: 0 auto;
-        display: block;
-    }
-}
-
-@media (max-width: 768px) {
-    .image-container {
-        margin: 16px 0;
-    }
-
-    .section-image,
-    .subsection-image {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .image-container {
-        margin: 12px 0;
-    }
-
-    .section-image,
-    .subsection-image {
-        width: 100%;
-    }
-}
-
-/* Анимации */
+/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -350,8 +322,12 @@
     }
 }
 
-/* Медиа-запросы */
+/* Media Queries */
 @media (max-width: 1024px) {
+    .guide {
+        padding-top: 20px;
+    }
+
     .content {
         grid-template-columns: 1fr;
     }
@@ -359,6 +335,23 @@
     .nav {
         position: relative;
         top: 0;
+        margin-bottom: 24px;
+    }
+
+    .section {
+        scroll-margin-top: 80px;
+    }
+
+    .image-container {
+        margin: 20px 0;
+        max-width: 100%;
+    }
+
+    .section-image,
+    .subsection-image {
+        width: 90%;
+        margin: 0 auto;
+        display: block;
     }
 }
 
@@ -379,6 +372,10 @@
         padding: 20px;
     }
 
+    .section {
+        scroll-margin-top: 60px;
+    }
+
     .download-card {
         flex-direction: column;
         gap: 16px;
@@ -395,6 +392,15 @@
         display: flex;
         justify-content: center;
         padding: 12px;
+    }
+
+    .image-container {
+        margin: 16px 0;
+    }
+
+    .section-image,
+    .subsection-image {
+        width: 100%;
     }
 }
 
@@ -421,5 +427,14 @@
 
     .subsection {
         padding: 16px;
+    }
+
+    .image-container {
+        margin: 12px 0;
+    }
+
+    .section-image,
+    .subsection-image {
+        width: 100%;
     }
 }
