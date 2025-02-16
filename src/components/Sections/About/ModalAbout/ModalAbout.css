@@ -130,9 +130,8 @@
     margin-bottom: 20px;
     padding: 17px;
     background: rgba(37, 99, 235, 0.1);
-    border: 1px solid rgba(96, 165, 250, 0.2);
     border-radius: 14px;
-    padding: 17px;
+    border: 1px solid rgba(96, 165, 250, 0.2);
     gap: 17px;
     flex-wrap: wrap;
 }
@@ -286,6 +285,7 @@
     min-height: 20px;
 }
 
+/* Анимации */
 @keyframes modalAboutOverlayShow {
     from {
         opacity: 0;
@@ -344,12 +344,8 @@
     }
 }
 
+/* Медиа-запросы */
 @media (max-width: 768px) {
-    .modal-about-overlay .modal-about-stats {
-        background: rgba(37, 99, 235, 0.1);
-        border: 1px solid rgba(96, 165, 250, 0.2);
-    }
-
     .modal-about-content {
         max-height: 72vh;
     }
@@ -375,6 +371,8 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
+        background: rgba(37, 99, 235, 0.1);
+        border: 1px solid rgba(96, 165, 250, 0.2);
     }
 
     .modal-about-button {
@@ -398,17 +396,16 @@
 }
 
 @media (max-width: 480px) {
-    .modal-about-overlay .modal-about-stats {
+    .modal-about-stats {
+        padding: 10px;
         background: rgba(37, 99, 235, 0.1);
         border: 1px solid rgba(96, 165, 250, 0.2);
     }
 
-    .modal-about-stats {
-        padding: 10px;
-    }
-
     .modal-about-button {
         min-width: 170px;
+        padding: 10px 17px;
+        font-size: 12px;
     }
 
     .modal-about-current-price {
@@ -420,11 +417,6 @@
     }
 
     .modal-about-discount-badge {
-        font-size: 12px;
-    }
-
-    .modal-about-button {
-        padding: 10px 17px;
         font-size: 12px;
     }
 }
