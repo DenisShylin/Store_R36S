@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import reviewImages from "../../../constants/reviewImages";
 import "./Reviews.css";
 
 const AnimatedArrow = () => (
@@ -79,8 +80,8 @@ const Reviews = () => {
       date: "21 Aug 2024",
       text: "I just got my hands on the R36S retro console and it's seriously amazing for old-school gaming. The screen is super clear, it runs games smoothly, and battery life is solid. I love how I can load up my favorite classics and play anywhere.",
       images: {
-        webp: "/src/assets/img/reviews/imm_1_1x.webp",
-        jpeg: "/src/assets/img/reviews/imm_1_1x.jpg",
+        webp: reviewImages.review1.webp,
+        jpeg: reviewImages.review1.jpg,
       },
       helpful: 12,
       verified: true,
@@ -93,8 +94,8 @@ const Reviews = () => {
       date: "26 Aug 2024",
       text: "After playing with the R36S for a week, I'm really impressed and absolutely delighted. The build quality feels great, and switching between different retro games is super easy. The controls are comfortable for long gaming sessions.",
       images: {
-        webp: "/src/assets/img/reviews/imm_4_1x.webp",
-        jpeg: "/src/assets/img/reviews/imm_4_1x.jpg",
+        webp: reviewImages.review4.webp,
+        jpeg: reviewImages.review4.jpg,
       },
       helpful: 8,
       verified: true,
@@ -107,8 +108,8 @@ const Reviews = () => {
       date: "22 Aug 2024",
       text: "The R36S has become my go-to gaming device. I wasn't sure about buying another retro console, but this one surprised me. The screen is bright and sharp, games run without issues, and it's small enough to fit in my pocket.",
       images: {
-        webp: "/src/assets/img/reviews/imm_3_1x.webp",
-        jpeg: "/src/assets/img/reviews/imm_3_1x.jpg",
+        webp: reviewImages.review3.webp,
+        jpeg: reviewImages.review3.jpg,
       },
       helpful: 15,
       verified: true,
@@ -121,8 +122,8 @@ const Reviews = () => {
       date: "28 Aug 2024",
       text: "I've been using the R36S for a few weeks now, and I'm genuinely impressed. The 3.5-inch IPS screen delivers crisp visuals, and the build quality feels solid. The dual analog sticks are responsive, making retro gaming a joy.",
       images: {
-        webp: "/src/assets/img/reviews/imm_2_1x.webp",
-        jpeg: "/src/assets/img/reviews/imm_2_1x.jpg",
+        webp: reviewImages.review2.webp,
+        jpeg: reviewImages.review2.jpg,
       },
       helpful: 10,
       verified: true,
