@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import heroImage1x from "../../../assets/img/hero/hero1_1x_.png";
-import heroImage2x from "../../../assets/img/hero/hero1_2x_.png";
+import heroImage1x from "../../../assets/img/hero/herou1_1x_.png";
+import heroImage2x from "../../../assets/img/hero/herou1_2x_.png";
 import "./Hero.css";
 
 const Hero = () => {

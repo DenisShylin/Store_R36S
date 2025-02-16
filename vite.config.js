@@ -13,4 +13,5 @@ export default defineConfig({
       "@": resolve(__dirname, "./src"),
     },
   },
+  assetsInclude: ["**/*.MP4", "**/*.mp4", "**/*.webm", "**/*.gif"],
 });

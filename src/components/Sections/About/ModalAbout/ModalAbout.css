@@ -29,6 +29,25 @@
     backdrop-filter: blur(12px);
 }
 
+.modal-about-content::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.modal-about-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.modal-about-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.modal-about-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
 .modal-about-close {
     cursor: pointer;
     padding: 17px;
@@ -111,8 +130,9 @@
     margin-bottom: 20px;
     padding: 17px;
     background: rgba(37, 99, 235, 0.1);
-    border-radius: 14px;
     border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 14px;
+    padding: 17px;
     gap: 17px;
     flex-wrap: wrap;
 }
@@ -184,6 +204,30 @@
     animation: gradientShift 4s ease infinite;
 }
 
+.modal-about-button-pulse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    transform: scale(0);
+    animation: buttonPulse 2s ease-out infinite;
+}
+
+.modal-about-button-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+    animation: buttonShine 3s linear infinite;
+}
+
 .modal-about-button-text {
     position: relative;
     z-index: 2;
@@ -201,7 +245,111 @@
     white-space: pre-line;
 }
 
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.sound-control {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    backdrop-filter: blur(4px);
+}
+
+.sound-control:hover {
+    background: rgba(0, 0, 0, 0.7);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.sound-control:active {
+    transform: scale(0.95);
+}
+
+.sound-control svg {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+}
+
+@keyframes modalAboutOverlayShow {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalAboutShow {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes buttonPulse {
+    0% {
+        transform: scale(0);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes buttonShine {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 200%;
+    }
+}
+
 @media (max-width: 768px) {
+    .modal-about-overlay .modal-about-stats {
+        background: rgba(37, 99, 235, 0.1);
+        border: 1px solid rgba(96, 165, 250, 0.2);
+    }
+
     .modal-about-content {
         max-height: 72vh;
     }
@@ -233,9 +381,28 @@
         min-width: 213px;
         max-width: 255px;
     }
+
+    .sound-control {
+        width: 34px;
+        height: 34px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .sound-control svg {
+        width: 16px;
+        height: 16px;
+        min-width: 16px;
+        min-height: 16px;
+    }
 }
 
 @media (max-width: 480px) {
+    .modal-about-overlay .modal-about-stats {
+        background: rgba(37, 99, 235, 0.1);
+        border: 1px solid rgba(96, 165, 250, 0.2);
+    }
+
     .modal-about-stats {
         padding: 10px;
     }
@@ -260,98 +427,4 @@
         padding: 10px 17px;
         font-size: 12px;
     }
-
-    @keyframes modalAboutOverlayShow {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
-
-    @keyframes modalAboutShow {
-        from {
-            opacity: 0;
-            transform: scale(0.95);
-        }
-
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-
-    @keyframes gradientShift {
-        0% {
-            background-position: 0% 50%;
-        }
-
-        50% {
-            background-position: 100% 50%;
-        }
-
-        100% {
-            background-position: 0% 50%;
-        }
-    }
-
-    .video-wrapper {
-        position: relative;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .sound-control {
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        background: rgba(0, 0, 0, 0.5);
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        color: white;
-        backdrop-filter: blur(4px);
-    }
-
-    .sound-control:hover {
-        background: rgba(0, 0, 0, 0.7);
-        transform: scale(1.1);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .sound-control:active {
-        transform: scale(0.95);
-    }
-
-    .sound-control svg {
-        width: 20px;
-        height: 20px;
-        min-width: 20px;
-        min-height: 20px;
-    }
-
-    @media (max-width: 768px) {
-        .sound-control {
-            width: 34px;
-            height: 34px;
-            bottom: 15px;
-            right: 15px;
-        }
-
-        .sound-control svg {
-            width: 16px;
-            height: 16px;
-            min-width: 16px;
-            min-height: 16px;
-        }
-    }
-
 }

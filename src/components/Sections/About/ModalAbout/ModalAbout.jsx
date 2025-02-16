@@ -1,23 +1,20 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import modalMedia from "../../../../constants/modalMedia";
 import "./ModalAbout.css";
 
 const ModalAbout = ({ feature = null, onClose }) => {
   const [isVideo, setIsVideo] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const colorImages = [
-    "/src/assets/img/modal/Untitled_1_1x.jpg",
-    "/src/assets/img/modal/Untitled_2_1x.jpg",
-    "/src/assets/img/modal/Untitled_3_1x.jpg",
-    "/src/assets/img/modal/Untitled_4_1x.jpg",
-  ];
+  const colorImages = modalMedia.images.colors;
 
   useEffect(() => {
     const checkIsVideo = () => {
       if (!feature?.imageUrl) return false;
+      if (modalMedia.videos[feature.imageUrl]) return true;
 
-      const videoExtensions = [".mp4", ".MP4", ".webm", ".ogg"];
+      const videoExtensions = [".mp4", ".MP4", ".webm", ".ogg", ".gif"];
       return videoExtensions.some((ext) =>
         feature.imageUrl.toLowerCase().endsWith(ext)
       );
@@ -54,7 +51,7 @@ const ModalAbout = ({ feature = null, onClose }) => {
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [feature?.title]);
+  }, [feature?.title, colorImages.length]);
 
   const renderMedia = () => {
     if (!feature) return null;
@@ -69,25 +66,39 @@ const ModalAbout = ({ feature = null, onClose }) => {
       );
     }
 
-    if (isVideo && feature.imageUrl) {
+    if (isVideo) {
+      const videoSrc = modalMedia.videos[feature.imageUrl] || feature.imageUrl;
+
+      if (videoSrc.toLowerCase().endsWith(".gif")) {
+        return (
+          <img
+            src={videoSrc}
+            alt={feature.imageAlt || "Feature animation"}
+            className="modal-about-image"
+          />
+        );
+      }
+
       return (
-        <video
-          className="modal-about-image"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-        >
-          <source src={feature.imageUrl} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        <div className="video-wrapper">
+          <video
+            className="modal-about-image"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          >
+            <source src={videoSrc} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
       );
     }
 
     return feature.imageUrl ? (
       <img
-        src={feature.imageUrl}
+        src={modalMedia.images[feature.imageUrl] || feature.imageUrl}
         alt={feature.imageAlt || "Feature image"}
         className="modal-about-image"
       />
