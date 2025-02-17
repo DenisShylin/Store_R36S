@@ -8,7 +8,7 @@ const __dirname = dirname(__filename);
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: "/", // Изменено для Vercel
+  base: "/",
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
@@ -30,19 +30,37 @@ export default defineConfig(({ mode }) => ({
     sourcemap: mode === "development",
     rollupOptions: {
       output: {
+        manualChunks: undefined,
         assetFileNames: (assetInfo) => {
-          const extType = assetInfo.name.split(".").at(1)?.toLowerCase();
+          const info = assetInfo.name.split(".");
+          const extType = info[info.length - 1];
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            return `assets/images/[name][extname]`;
+            return `assets/images/[name]-[hash][extname]`;
           }
           if (/mp4|webm/i.test(extType)) {
-            return `assets/videos/[name][extname]`;
+            return `assets/videos/[name]-[hash][extname]`;
           }
-          return `assets/[name][extname]`;
+          return `assets/[name]-[hash][extname]`;
         },
         chunkFileNames: "assets/js/[name]-[hash].js",
         entryFileNames: "assets/js/[name]-[hash].js",
       },
     },
+  },
+
+  optimizeDeps: {
+    include: [
+      "react",
+      "react-dom",
+      "react-router-dom",
+      "@reduxjs/toolkit",
+      "react-redux",
+      "axios",
+    ],
+    exclude: ["accordion-js"],
+  },
+
+  esbuild: {
+    logOverride: { "this-is-undefined-in-esm": "silent" },
   },
 }));

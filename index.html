@@ -3,20 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/AliExpress.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Оптимизированная загрузка шрифтов -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="preload"
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Orbitron:wght@400;700&display=swap"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Метаданные -->
     <title>R36S - Game consoles</title>
     <meta name="description" content="Магазин ігрових консолей та аксесуарів" />
+
+    <!-- Дополнительные мета-теги для SEO и соц. сетей -->
+    <meta property="og:title" content="R36S - Game consoles" />
+    <meta
+      property="og:description"
+      content="Магазин ігрових консолей та аксесуарів"
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Базовый путь -->
+    <base href="/" />
   </head>
   <body>
     <div id="root"></div>
