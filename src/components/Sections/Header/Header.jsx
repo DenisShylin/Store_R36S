@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
 import MobileMenu from "../../MobileMenu/MobileMenu";
 import "./Header.css";
 
@@ -7,20 +8,19 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isVisible, setIsVisible] = useState(true);
-  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [scrollTimeout, setScrollTimeout] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
+      const currentScrollPos = window.scrollY;
       const isScrolledDown = prevScrollPos < currentScrollPos;
 
-      // Clear existing timeout
       if (scrollTimeout) {
         clearTimeout(scrollTimeout);
       }
 
-      // Only hide header after scrolling down 100px
       if (currentScrollPos > 100) {
         setIsVisible(!isScrolledDown);
       } else {
@@ -30,7 +30,6 @@ const Header = () => {
       setPrevScrollPos(currentScrollPos);
       setIsScrolled(currentScrollPos > 0);
 
-      // Set new timeout
       const timeout = setTimeout(() => {
         // После прекращения скролла можно добавить дополнительную логику
       }, 150);
@@ -59,25 +58,41 @@ const Header = () => {
     };
   }, [prevScrollPos, isMenuOpen, scrollTimeout]);
 
-  const handleNavClick = (e) => {
-    const href = e.currentTarget.getAttribute("href");
-    if (href.startsWith("#")) {
-      e.preventDefault();
-      const element = document.querySelector(href);
+  useEffect(() => {
+    if (location.hash) {
+      const targetId = location.hash.replace("#", "");
+      const element = document.getElementById(targetId);
+
       if (element) {
-        setIsVisible(true);
+        setTimeout(() => {
+          const headerHeight = document.querySelector(".header").offsetHeight;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition =
+            elementPosition + window.scrollY - headerHeight;
 
-        // Получаем высоту хедера
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }, 100);
+      }
+    }
+  }, [location.hash]);
+
+  const handleNavClick = (e) => {
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute("href");
+    const targetId = href.replace("#", "");
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      setIsVisible(true);
+
+      setTimeout(() => {
         const headerHeight = document.querySelector(".header").offsetHeight;
-
-        // Получаем позицию элемента относительно верха страницы
         const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerHeight;
 
-        // Текущая позиция скролла
-        const offsetPosition =
-          elementPosition + window.pageYOffset - headerHeight;
-
-        // Скролл к элементу с учетом высоты хедера
         window.scrollTo({
           top: offsetPosition,
           behavior: "smooth",
@@ -85,18 +100,26 @@ const Header = () => {
 
         if (isMenuOpen) {
           setIsMenuOpen(false);
+          document.body.style.overflow = "unset";
         }
 
+        window.history.replaceState(
+          null,
+          "",
+          `${window.location.pathname}${href}`
+        );
+
         setTimeout(() => {
-          const currentScrollPos = window.pageYOffset;
-          setPrevScrollPos(currentScrollPos);
-        }, 1000);
-      }
+          setPrevScrollPos(window.scrollY);
+        }, 100);
+      }, 50);
     }
   };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    // Блокируем/разблокируем скролл при открытии/закрытии меню
+    document.body.style.overflow = isMenuOpen ? "unset" : "hidden";
   };
 
   return (
@@ -107,9 +130,9 @@ const Header = () => {
         } ${isVisible ? "visible" : "hidden"}`}
       >
         <nav className="nav">
-          <a href="/" className="logo">
+          <Link to="/" className="logo">
             R36S
-          </a>
+          </Link>
 
           <ul className="desktop-menu">
             <li>
@@ -174,6 +197,7 @@ const Header = () => {
         isOpen={isMenuOpen}
         onClose={toggleMenu}
         isMobile={isMobile}
+        handleNavClick={handleNavClick}
       />
     </>
   );

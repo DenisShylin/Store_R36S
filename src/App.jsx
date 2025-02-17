@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import "accordion-js/dist/accordion.min.css";
 
@@ -13,7 +13,6 @@ import Reviews from "./components/Sections/Reviews/Reviews";
 import Contact from "./components/Sections/Contact/Contact";
 import Footer from "./components/Sections/Footer/Footer";
 
-// Компонент для страницы 404
 const NotFound = () => {
   return (
     <div className="not-found">
@@ -43,11 +42,6 @@ function App() {
             </main>
           }
         />
-        {/* Здесь можно добавить другие маршруты */}
-        {/* <Route path="/about" element={<AboutPage />} /> */}
-        {/* <Route path="/products" element={<ProductsPage />} /> */}
-
-        {/* Обработка несуществующих маршрутов */}
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

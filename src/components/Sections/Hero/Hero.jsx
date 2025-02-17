@@ -61,6 +61,31 @@ const Hero = () => {
     );
   };
 
+  const handleMoreDetailsClick = (e) => {
+    e.preventDefault();
+    const featuresSection = document.getElementById("features");
+    const header = document.querySelector(".header");
+
+    if (featuresSection && header) {
+      const headerHeight = header.offsetHeight;
+      const elementPosition = featuresSection.getBoundingClientRect().top;
+      const currentScrollY = window.scrollY || window.pageYOffset;
+      const offsetPosition = elementPosition + currentScrollY - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+
+      // Обновляем URL без перезагрузки страницы
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}#features`
+      );
+    }
+  };
+
   return (
     <section className={`hero ${imageLoaded ? "hero--loaded" : ""}`}>
       <div className="hero__background">
@@ -122,12 +147,12 @@ const Hero = () => {
               <span className="hero__button-text">Shop With Discount</span>
               <span className="hero__button-shine"></span>
             </button>
-            <a
-              href="#features"
+            <button
+              onClick={handleMoreDetailsClick}
               className="hero__button hero__button--secondary"
             >
               More details
-            </a>
+            </button>
           </div>
         </div>
       </div>

@@ -44,14 +44,25 @@ const Features = () => {
 
   const handleMoreInfoClick = () => {
     const aboutSection = document.getElementById("features-r36s");
-    if (aboutSection) {
+    const header = document.querySelector(".header");
+
+    if (aboutSection && header) {
+      const headerHeight = header.offsetHeight;
       const elementPosition = aboutSection.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - 80;
+      const currentScrollY = window.scrollY || window.pageYOffset;
+      const offsetPosition = elementPosition + currentScrollY - headerHeight;
 
       window.scrollTo({
         top: offsetPosition,
         behavior: "smooth",
       });
+
+      // Обновляем URL без перезагрузки страницы
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}#features-r36s`
+      );
     }
   };
 

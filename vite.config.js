@@ -8,7 +8,7 @@ const __dirname = dirname(__filename);
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: "/",
+  base: "/", // Изменено для Vercel
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
@@ -21,77 +21,28 @@ export default defineConfig(({ mode }) => ({
     port: 3000,
     open: true,
     host: true,
-    strictPort: false,
-    cors: true,
-    // Добавляем обработку ошибок сервера
-    hmr: {
-      overlay: true,
-    },
-    watch: {
-      usePolling: true,
-    },
   },
 
   build: {
+    outDir: "dist",
     assetsDir: "assets",
-    minify: "terser",
+    minify: "esbuild",
     sourcemap: mode === "development",
     rollupOptions: {
       output: {
         assetFileNames: (assetInfo) => {
           const extType = assetInfo.name.split(".").at(1)?.toLowerCase();
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            return `assets/img/[name][extname]`;
+            return `assets/images/[name][extname]`;
           }
           if (/mp4|webm/i.test(extType)) {
-            return `assets/video/[name][extname]`;
+            return `assets/videos/[name][extname]`;
           }
-          return `assets/other/[name][extname]`;
+          return `assets/[name][extname]`;
         },
-        manualChunks: (id) => {
-          if (id.includes("node_modules")) {
-            if (id.includes("react")) {
-              return "vendor.react";
-            }
-            if (id.includes("@reduxjs")) {
-              return "vendor.redux";
-            }
-            return "vendor";
-          }
-        },
-      },
-      input: {
-        main: resolve(__dirname, "index.html"),
+        chunkFileNames: "assets/js/[name]-[hash].js",
+        entryFileNames: "assets/js/[name]-[hash].js",
       },
     },
-
-    terserOptions: {
-      compress: {
-        drop_console: mode === "production",
-        drop_debugger: mode === "production",
-      },
-    },
-
-    // Добавляем дополнительные оптимизации сборки
-    chunkSizeWarningLimit: 1000,
-    cssCodeSplit: true,
-    reportCompressedSize: false,
-  },
-
-  optimizeDeps: {
-    include: [
-      "react",
-      "react-dom",
-      "react-router-dom",
-      "@reduxjs/toolkit",
-      "react-redux",
-      "axios",
-    ],
-    exclude: ["accordion-js"],
-  },
-
-  // Добавляем настройки для улучшения производительности
-  esbuild: {
-    logOverride: { "this-is-undefined-in-esm": "silent" },
   },
 }));

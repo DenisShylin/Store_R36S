@@ -8,9 +8,12 @@ import {
   PhoneCall,
   X,
 } from "lucide-react";
+import { useLocation } from "react-router-dom";
 import "./MobileMenu.css";
 
 const MobileMenu = ({ isOpen = false, onClose }) => {
+  const location = useLocation();
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -22,6 +25,33 @@ const MobileMenu = ({ isOpen = false, onClose }) => {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const targetId = href.replace("#", "");
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      const headerHeight = document.querySelector(".header").offsetHeight;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+
+      onClose();
+      setTimeout(() => {
+        document.body.style.overflow = "";
+      }, 300);
+
+      // Обновляем URL с использованием history API
+      const newUrl = `${location.pathname}${href}`;
+      window.history.pushState(null, "", newUrl);
+    }
+  };
 
   const handleOverlayClick = (e) => {
     if (e.target.classList.contains("mobile-menu")) {
@@ -100,12 +130,7 @@ const MobileMenu = ({ isOpen = false, onClose }) => {
                 <a
                   href={item.href}
                   className="mobile-menu__link"
-                  onClick={() => {
-                    onClose();
-                    setTimeout(() => {
-                      document.body.style.overflow = "";
-                    }, 300);
-                  }}
+                  onClick={(e) => handleNavClick(e, item.href)}
                 >
                   <span className="mobile-menu__icon">{item.icon}</span>
                   <span className="mobile-menu__text">{item.text}</span>
