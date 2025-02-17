@@ -6,32 +6,92 @@ import { dirname, resolve } from "node:path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: "/", // Явно указываем базовый путь
+  base: "/",
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
     },
   },
-  // Настройка для публичных ассетов
   publicDir: "public",
   assetsInclude: ["**/*.MP4", "**/*.mp4", "**/*.webm", "**/*.gif"],
-  // Настройка для обработки ассетов
+
+  server: {
+    port: 3000,
+    open: true,
+    host: true,
+    strictPort: false,
+    cors: true,
+    // Добавляем обработку ошибок сервера
+    hmr: {
+      overlay: true,
+    },
+    watch: {
+      usePolling: true,
+    },
+  },
+
   build: {
     assetsDir: "assets",
+    minify: "terser",
+    sourcemap: mode === "development",
     rollupOptions: {
       output: {
         assetFileNames: (assetInfo) => {
-          let extType = assetInfo.name.split(".").at(1);
+          const extType = assetInfo.name.split(".").at(1)?.toLowerCase();
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            extType = "img";
-          } else if (/mp4|webm|MP4/i.test(extType)) {
-            extType = "video";
+            return `assets/img/[name][extname]`;
           }
-          return `assets/${extType}/[name][extname]`;
+          if (/mp4|webm/i.test(extType)) {
+            return `assets/video/[name][extname]`;
+          }
+          return `assets/other/[name][extname]`;
+        },
+        manualChunks: (id) => {
+          if (id.includes("node_modules")) {
+            if (id.includes("react")) {
+              return "vendor.react";
+            }
+            if (id.includes("@reduxjs")) {
+              return "vendor.redux";
+            }
+            return "vendor";
+          }
         },
       },
+      input: {
+        main: resolve(__dirname, "index.html"),
+      },
     },
+
+    terserOptions: {
+      compress: {
+        drop_console: mode === "production",
+        drop_debugger: mode === "production",
+      },
+    },
+
+    // Добавляем дополнительные оптимизации сборки
+    chunkSizeWarningLimit: 1000,
+    cssCodeSplit: true,
+    reportCompressedSize: false,
   },
-});
+
+  optimizeDeps: {
+    include: [
+      "react",
+      "react-dom",
+      "react-router-dom",
+      "@reduxjs/toolkit",
+      "react-redux",
+      "axios",
+    ],
+    exclude: ["accordion-js"],
+  },
+
+  // Добавляем настройки для улучшения производительности
+  esbuild: {
+    logOverride: { "this-is-undefined-in-esm": "silent" },
+  },
+}));
