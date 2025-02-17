@@ -1,9 +1,9 @@
-// Update image imports to match the correct path in src/assets/img/modal/
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./About.css";
 import ModalAbout from "./ModalAbout/ModalAbout.jsx";
 import { createPortal } from "react-dom";
 
+// Import images
 import displayControls from "@/assets/img/modal/video_1_.gif";
 import videoGif from "@/assets/img/modal/video_2_.gif";
 import untitled1 from "@/assets/img/modal/Untitled_1_1x.jpg";
@@ -11,7 +11,7 @@ import untitled2 from "@/assets/img/modal/Untitled_2_1x.jpg";
 import untitled3 from "@/assets/img/modal/Untitled_3_1x.jpg";
 import untitled4 from "@/assets/img/modal/Untitled_4_1x.jpg";
 
-// Update video imports to use the public directory
+// Import videos
 import videoBattery from "/video/video_3_batrey_.MP4";
 import videoModa6 from "/video/video_6_.MP4";
 import videoOption2 from "/video/video_5_option_.MP4";
@@ -21,6 +21,15 @@ const About = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFeature, setSelectedFeature] = useState(null);
+
+  // Add cleanup for event listeners
+  useEffect(() => {
+    return () => {
+      // Cleanup when component unmounts
+      setIsModalOpen(false);
+      setSelectedFeature(null);
+    };
+  }, []);
 
   const handleMouseMove = (e) => {
     const card = e.currentTarget;
@@ -32,6 +41,7 @@ const About = () => {
   };
 
   const handleOpenModal = (feature, e) => {
+    e.preventDefault();
     e.stopPropagation();
     setSelectedFeature(feature);
     setIsModalOpen(true);
@@ -39,7 +49,9 @@ const About = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSelectedFeature(null);
+    setTimeout(() => {
+      setSelectedFeature(null);
+    }, 100);
   };
 
   const features = [
@@ -100,9 +112,16 @@ The collection includes:
         "Enjoy vivid games on the 3.5* LCD display with crisp 640x480 resolution.",
       number: '3.5"',
       detail: "IPS display",
-      fullDescription: `R36S Console Display Specifications...`,
+      fullDescription: `R36S Console Display Specifications:
+• 3.5-inch IPS display
+• 640x480 resolution
+• High brightness and contrast
+• Wide viewing angles
+• Anti-glare coating
+• Energy-efficient backlight
+• Scratch-resistant surface`,
       imageUrl: videoGif,
-      imageAlt: "Retro games collection",
+      imageAlt: "Display Technologies",
     },
     {
       id: 3,
@@ -137,7 +156,7 @@ Key features:
 
 Take your gaming anywhere – play more, charge less.`,
       videoUrl: videoBattery,
-      imageAlt: "Коллекция ретро-игр",
+      imageAlt: "Battery Life",
     },
     {
       id: 4,
@@ -163,7 +182,7 @@ Take your gaming anywhere – play more, charge less.`,
       detail: "COLORS",
       fullDescription: `Experience the R36S Collection:
 
-The R36S console delivers 12+ captivating color variations in 2024, including our signature Midnight Black and eye-catching Galactic Purple. Each R36S model features recycled plastic finish and scratch-resistant coating. Since its launch, over 2M gamers worldwide chose R36S for its unique design options. Join the 92% of players rating our vibrant color selection 4.9/5.
+The R36S console delivers 12+ captivating color variations in 2024, including our signature Midnight Black and eye-catching Galactic Purple. Each R36S model features recycled plastic finish and scratch-resistant coating.
 
 Available Colors:
 - Classic Black
@@ -326,7 +345,11 @@ Never compromise between portability and performance - the R36S delivers both in
       {isModalOpen &&
         selectedFeature &&
         createPortal(
-          <ModalAbout feature={selectedFeature} onClose={handleCloseModal} />,
+          <ModalAbout
+            feature={selectedFeature}
+            onClose={handleCloseModal}
+            isOpen={isModalOpen}
+          />,
           document.body
         )}
     </section>
