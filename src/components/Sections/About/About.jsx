@@ -1,7 +1,20 @@
+// Update image imports to match the correct path in src/assets/img/modal/
 import { useState } from "react";
 import "./About.css";
-import ModalAbout from "./ModalAbout/ModalAbout";
+import ModalAbout from "./ModalAbout/ModalAbout.jsx";
 import { createPortal } from "react-dom";
+
+import displayControls from "@/assets/img/modal/video_1_.gif";
+import videoGif from "@/assets/img/modal/video_2_.gif";
+import untitled1 from "@/assets/img/modal/Untitled_1_1x.jpg";
+import untitled2 from "@/assets/img/modal/Untitled_2_1x.jpg";
+import untitled3 from "@/assets/img/modal/Untitled_3_1x.jpg";
+import untitled4 from "@/assets/img/modal/Untitled_4_1x.jpg";
+
+// Update video imports to use the public directory
+import videoBattery from "/video/video_3_batrey_.MP4";
+import videoModa6 from "/video/video_6_.MP4";
+import videoOption2 from "/video/video_5_option_.MP4";
 
 const About = () => {
   const [activeCard, setActiveCard] = useState(null);
@@ -22,13 +35,11 @@ const About = () => {
     e.stopPropagation();
     setSelectedFeature(feature);
     setIsModalOpen(true);
-    document.body.style.overflow = "hidden";
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedFeature(null);
-    document.body.style.overflow = "auto";
   };
 
   const features = [
@@ -63,7 +74,7 @@ The collection includes:
 • Complete libraries of NES, SNES, Sega and other consoles
 • Exclusive ports and rare releases
 • Optimized versions for modern hardware`,
-      imageUrl: "/src/assets/img/modal/Display_Controls (2).webp",
+      imageUrl: displayControls,
       imageAlt: "Коллекция ретро-игр",
     },
     {
@@ -89,21 +100,8 @@ The collection includes:
         "Enjoy vivid games on the 3.5* LCD display with crisp 640x480 resolution.",
       number: '3.5"',
       detail: "IPS display",
-      fullDescription: `R36S Console Display Specifications
-
- Screen & Processing
-- Resolution: 640x480 with advanced LCD panel
-- Processor: Quad-core 64-bit Cortex-A35 (up to 1.8GHz)
-- Memory: 1GB DDR3L RAM
-
- Display Features
-- Wide viewing angle LCD panel
-- Adjustable color temperature
-- Eye protection:
-  - Blue light filter
-  - Reduced eye strain technology
-- Durable hardened glass screen protection`,
-      imageUrl: "/src/assets/video/video.gif",
+      fullDescription: `R36S Console Display Specifications...`,
+      imageUrl: videoGif,
       imageAlt: "Retro games collection",
     },
     {
@@ -138,7 +136,7 @@ Key features:
 - Uninterrupted entertainment
 
 Take your gaming anywhere – play more, charge less.`,
-      imageUrl: "/src/assets/video/video_batrey.MP4",
+      videoUrl: videoBattery,
       imageAlt: "Коллекция ретро-игр",
     },
     {
@@ -178,8 +176,8 @@ Available Colors:
 - Deep Marine Blue
 - Natural Olive Green
 - Premium Transparent Red`,
-      imageUrl: "/src/assets/img/modal/R36S_1x_jpej.jpg",
-      imageAlt: "Коллекция ретро-игр",
+      colorImages: [untitled1, untitled2, untitled3, untitled4],
+      imageAlt: "R36S Color Variants",
     },
     {
       id: 5,
@@ -216,8 +214,8 @@ Available Colors:
 - Expandable storage support
 - Quick system updates
 - User-friendly interface`,
-      imageUrl: "/src/assets/video/Video_option2.MP4",
-      imageAlt: "Коллекция ретро-игр",
+      videoUrl: videoOption2,
+      imageAlt: "R36S Settings",
     },
     {
       id: 6,
@@ -252,8 +250,8 @@ Features:
 • Quick startup for instant gaming access
 
 Never compromise between portability and performance - the R36S delivers both in a perfectly portable package.`,
-      imageUrl: "/src/assets/video/video_moda_6.MP4",
-      imageAlt: "Коллекция ретро-игр",
+      videoUrl: videoModa6,
+      imageAlt: "R36S Portability",
     },
   ];
 

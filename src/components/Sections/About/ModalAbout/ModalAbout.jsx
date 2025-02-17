@@ -1,28 +1,18 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import modalMedia from "../../../../constants/modalMedia";
 import "./ModalAbout.css";
 
 const ModalAbout = ({ feature = null, onClose }) => {
   const [isVideo, setIsVideo] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const colorImages = modalMedia.images.colors;
 
   useEffect(() => {
     const checkIsVideo = () => {
-      if (!feature?.imageUrl) return false;
-      if (modalMedia.videos[feature.imageUrl]) return true;
-
-      const videoExtensions = [".mp4", ".MP4", ".webm", ".ogg", ".gif"];
-      return videoExtensions.some((ext) =>
-        feature.imageUrl.toLowerCase().endsWith(ext)
-      );
+      return feature?.videoUrl ? true : false;
     };
 
     setIsVideo(checkIsVideo());
-  }, [feature?.imageUrl]);
+  }, [feature?.videoUrl]);
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -44,124 +34,50 @@ const ModalAbout = ({ feature = null, onClose }) => {
 
   useEffect(() => {
     let interval;
-    if (feature?.title === "Extensive color selection") {
+    if (feature?.title === "Extensive color selection" && feature.colorImages) {
       interval = setInterval(() => {
         setCurrentImageIndex((prevIndex) =>
-          prevIndex === colorImages.length - 1 ? 0 : prevIndex + 1
+          prevIndex === feature.colorImages.length - 1 ? 0 : prevIndex + 1
         );
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [feature?.title, colorImages.length]);
-
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
-  };
+  }, [feature?.title, feature?.colorImages]);
 
   const renderMedia = () => {
     if (!feature) return null;
 
-    if (feature.title === "Extensive color selection") {
+    if (feature.title === "Extensive color selection" && feature.colorImages) {
       return (
         <img
-          src={colorImages[currentImageIndex]}
+          src={feature.colorImages[currentImageIndex]}
           alt={`R36S Color Variant ${currentImageIndex + 1}`}
           className="modal-about-image"
-          onError={(e) => {
-            console.error(
-              "Error loading color image:",
-              colorImages[currentImageIndex]
-            );
-            e.target.style.display = "none";
-          }}
         />
       );
     }
 
-    if (isVideo) {
-      const videoSrc = modalMedia.videos[feature.imageUrl] || feature.imageUrl;
-
-      if (videoSrc.toLowerCase().endsWith(".gif")) {
-        return (
-          <img
-            src={videoSrc}
-            alt={feature.imageAlt || "Feature animation"}
-            className="modal-about-image"
-            onError={(e) => {
-              console.error("Error loading GIF:", videoSrc);
-              e.target.style.display = "none";
-            }}
-          />
-        );
-      }
-
+    if (isVideo && feature.videoUrl) {
       return (
-        <div className="video-wrapper">
-          <video
-            className="modal-about-image"
-            autoPlay
-            muted={isMuted}
-            loop
-            playsInline
-            preload="auto"
-            onError={(e) => {
-              console.error("Error loading video:", videoSrc);
-              e.target.style.display = "none";
-            }}
-          >
-            <source
-              src={videoSrc}
-              type={
-                videoSrc.toLowerCase().endsWith(".mp4")
-                  ? "video/mp4"
-                  : "video/webm"
-              }
-            />
-            Your browser does not support the video tag.
-          </video>
-          <button className="sound-control" onClick={toggleMute}>
-            {isMuted ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                <line x1="23" y1="9" x2="17" y2="15" />
-                <line x1="17" y1="9" x2="23" y2="15" />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
-              </svg>
-            )}
-          </button>
-        </div>
+        <video
+          className="modal-about-image"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        >
+          <source src={feature.videoUrl} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       );
     }
 
     return feature.imageUrl ? (
       <img
-        src={modalMedia.images[feature.imageUrl] || feature.imageUrl}
+        src={feature.imageUrl}
         alt={feature.imageAlt || "Feature image"}
         className="modal-about-image"
-        onError={(e) => {
-          console.error("Error loading image:", feature.imageUrl);
-          e.target.style.display = "none";
-        }}
       />
     ) : null;
   };
@@ -203,7 +119,7 @@ const ModalAbout = ({ feature = null, onClose }) => {
               <span className="modal-about-original-price">US $108.06</span>
               <span className="modal-about-current-price">
                 $35.48
-                <span className="modal-about-discount-badge">-70%</span>
+                <span style={{ fontSize: "24px" }}>US</span>
               </span>
             </div>
 
@@ -214,7 +130,7 @@ const ModalAbout = ({ feature = null, onClose }) => {
               rel="noopener noreferrer"
             >
               <span className="modal-about-button-pulse"></span>
-              <span className="modal-about-button-text">BUY NOW</span>
+              <span className="modal-about-button-text">BUY NOW -70%</span>
               <span className="modal-about-button-shine"></span>
             </a>
           </div>
@@ -231,6 +147,8 @@ const ModalAbout = ({ feature = null, onClose }) => {
 ModalAbout.propTypes = {
   feature: PropTypes.shape({
     imageUrl: PropTypes.string,
+    videoUrl: PropTypes.string,
+    colorImages: PropTypes.arrayOf(PropTypes.string),
     imageAlt: PropTypes.string,
     title: PropTypes.string.isRequired,
     icon: PropTypes.node,
