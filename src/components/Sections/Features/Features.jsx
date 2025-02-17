@@ -114,7 +114,7 @@ const Features = () => {
               playsInline
               autoPlay
             >
-              <source src="/src/assets/video/VIDEO_RS36.mp4" type="video/mp4" />
+              <source src="/public/video/VIDEO_RS36.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <button
