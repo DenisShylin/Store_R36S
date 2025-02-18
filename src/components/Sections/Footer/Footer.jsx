@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Footer.css";
 import PartnershipModal from "./PartnershipModal/PartnershipModal";
 // Добавляем импорт иконки
-import aliExpressIcon from "/aliexpress.ico";
+import aliExpressIcon from "/AliExpress.ico";
 
 const Footer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
