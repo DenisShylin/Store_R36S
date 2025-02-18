@@ -23,31 +23,37 @@ const NotFound = () => {
 };
 
 function App() {
+  console.log("App component rendering");
   const isDevelopment = import.meta.env.MODE === "development";
   const basename = isDevelopment ? "/" : "/r32s/";
+  console.log("Mode:", import.meta.env.MODE);
+  console.log("Basename:", basename);
+  console.log("Current URL:", window.location.href);
 
   return (
     <Router basename={basename}>
-      <Header />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <main>
-              <Hero />
-              <About />
-              <Features />
-              <Categories />
-              <Articles />
-              <Reviews />
-              <Contact />
-              <Products />
-            </main>
-          }
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
+      <div className="app-container">
+        <Header />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <main>
+                <Hero />
+                <About />
+                <Features />
+                <Categories />
+                <Articles />
+                <Reviews />
+                <Contact />
+                <Products />
+              </main>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </div>
     </Router>
   );
 }
