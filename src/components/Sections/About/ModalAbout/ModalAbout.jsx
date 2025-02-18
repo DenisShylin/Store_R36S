@@ -130,7 +130,7 @@ const ModalAbout = ({ feature = null, onClose }) => {
               rel="noopener noreferrer"
             >
               <span className="modal-about-button-pulse"></span>
-              <span className="modal-about-button-text">BUY NOW -70%</span>
+              <span className="modal-about-button-text">BUY NOW -68%</span>
               <span className="modal-about-button-shine"></span>
             </a>
           </div>

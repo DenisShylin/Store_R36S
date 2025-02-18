@@ -75,7 +75,7 @@ const About = () => {
           <rect x="2" y="6" width="20" height="12" rx="2"></rect>
         </svg>
       ),
-      title: "Retro Game Collection",
+      title: "Gaming classics",
       description: "Get into the game with the r36s portable gaming console.",
       number: "15K+",
       detail: "classic games",
@@ -107,7 +107,7 @@ The collection includes:
           <line x1="12" y1="17" x2="12" y2="21"></line>
         </svg>
       ),
-      title: "Vibrant Display Technologies",
+      title: "IPS display",
       description:
         "Enjoy vivid games on the 3.5* LCD display with crisp 640x480 resolution.",
       number: '3.5"',
@@ -176,7 +176,7 @@ Take your gaming anywhere – play more, charge less.`,
           <circle cx="12" cy="12" r="2"></circle>
         </svg>
       ),
-      title: "Extensive color selection",
+      title: "Color variety",
       description: "Experience our wide selection of stunning console colors.",
       number: "10+",
       detail: "COLORS",

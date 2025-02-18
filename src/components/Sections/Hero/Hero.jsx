@@ -14,9 +14,9 @@ const Hero = () => {
   });
 
   const desktopDescription =
-    "Discover the world of retro gaming with the R36S portable console. 15,000+ classic games, a powerful processor and a bright IPS screen - everything for an unforgettable gaming adventure!";
+    "The R36S HANDHELD GAME CONSOLE opens the door to the exciting world of retro gaming, offering an impressive collection of over 15,000 legendary games from different eras and platforms. At its heart is a premium 3.5-inch IPS screen, which renders images with stunning clarity and vibrant color saturation. The R36S HANDHELD GAME CONSOLE doesn't just play retro games - it reimagines classic gaming for the modern era. Dive into a universe of gaming nostalgia with the R36S HANDHELD GAME CONSOLE!";
   const mobileDescription =
-    "Relive gaming history in the palm of your hands with the R36S";
+    "R36S HANDHELD GAME CONSOLE - Gaming legends in the palm of your hand!";
 
   useEffect(() => {
     const preloadImages = () => {
@@ -118,8 +118,8 @@ const Hero = () => {
 
         <div className="hero__content" ref={titleRef}>
           <h1 className="hero__title">
-            <span className="hero__title-line">Gaming retro</span>
-            <span className="hero__title-line">console R36S</span>
+            <span className="hero__title-line">R36S HENDHELD</span>
+            <span className="hero__title-line">GAME CONSOLE</span>
           </h1>
           <p className="hero__description">
             {isDesktop ? desktopDescription : mobileDescription}
