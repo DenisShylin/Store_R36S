@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import "./Categories.css";
 
+// Import video
+import videoCategories from "/video/video_categories_.MP4";
+
 const Categories = () => {
   const videoRef = useRef(null);
   const sectionRef = useRef(null);
@@ -15,7 +18,6 @@ const Categories = () => {
         if (entry.isIntersecting) {
           entry.target.classList.add("animate-in");
         } else {
-          // Выключаем звук при уходе с секции
           if (videoRef.current) {
             videoRef.current.muted = true;
             setIsMuted(true);
@@ -59,7 +61,6 @@ const Categories = () => {
   };
 
   const handleVideoClick = (e) => {
-    // Проверяем, что клик был не по элементам управления
     if (!e.target.closest(".categories__video-controls")) {
       togglePlay();
     }
@@ -110,8 +111,8 @@ const Categories = () => {
                 muted
                 loop
                 playsInline
+                src={videoCategories}
               >
-                <source src="/video/video_categories_.MP4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               <div className="categories__video-overlay"></div>
@@ -120,7 +121,7 @@ const Categories = () => {
                 <button
                   className="categories__video-play"
                   onClick={(e) => {
-                    e.stopPropagation(); // Предотвращаем всплытие события
+                    e.stopPropagation();
                     togglePlay();
                   }}
                   aria-label={isPlaying ? "Пауза" : "Воспроизвести"}
@@ -156,7 +157,7 @@ const Categories = () => {
                 <button
                   className="categories__video-mute"
                   onClick={(e) => {
-                    e.stopPropagation(); // Предотвращаем всплытие события
+                    e.stopPropagation();
                     setIsMuted(!isMuted);
                     if (videoRef.current) {
                       videoRef.current.muted = !isMuted;

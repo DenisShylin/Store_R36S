@@ -2,15 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import "./Features.css";
 
+// Import video
+import videoFeatures from "/video/video_features_.MP4";
+
 const Features = () => {
   const videoRef = useRef(null);
   const sectionRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
-    // Автоматическое воспроизведение видео и установка громкости
     if (videoRef.current) {
-      videoRef.current.volume = 0.5; // Устанавливаем громкость на 50%
+      videoRef.current.volume = 0.5;
       videoRef.current.play().catch((error) => {
         console.log("Автовоспроизведение не удалось:", error);
       });
@@ -57,7 +59,6 @@ const Features = () => {
         behavior: "smooth",
       });
 
-      // Обновляем URL без перезагрузки страницы
       window.history.replaceState(
         null,
         "",
@@ -69,7 +70,6 @@ const Features = () => {
   const toggleMute = () => {
     if (videoRef.current) {
       videoRef.current.muted = !videoRef.current.muted;
-      // При включении звука убеждаемся, что громкость установлена на 50%
       if (!videoRef.current.muted) {
         videoRef.current.volume = 0.5;
       }
@@ -124,8 +124,8 @@ const Features = () => {
               muted={isMuted}
               playsInline
               autoPlay
+              src={videoFeatures}
             >
-              <source src="/video/video_features_.MP4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <button
