@@ -8,7 +8,7 @@ const __dirname = dirname(__filename);
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: "/",
+  base: "./", // Изменено с "/" на "./" для относительных путей
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
@@ -28,24 +28,42 @@ export default defineConfig(({ mode }) => ({
     assetsDir: "assets",
     minify: "esbuild",
     sourcemap: mode === "development",
+    emptyOutDir: true, // Очистка папки dist перед сборкой
+    cssCodeSplit: true, // Явное разделение CSS
     rollupOptions: {
       output: {
-        manualChunks: undefined,
+        manualChunks: {
+          // Разделение вендоров на отдельные чанки
+          vendor: [
+            "react",
+            "react-dom",
+            "react-router-dom",
+            "@reduxjs/toolkit",
+            "react-redux",
+            "axios",
+          ],
+        },
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name.split(".");
           const extType = info[info.length - 1];
+          if (extType === "css") {
+            return `assets/css/[name].[hash][extname]`;
+          }
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            return `assets/images/[name]-[hash][extname]`;
+            return `assets/images/[name].[hash][extname]`;
           }
           if (/mp4|webm/i.test(extType)) {
-            return `assets/videos/[name]-[hash][extname]`;
+            return `assets/videos/[name].[hash][extname]`;
           }
-          return `assets/[name]-[hash][extname]`;
+          return `assets/[name].[hash][extname]`;
         },
-        chunkFileNames: "assets/js/[name]-[hash].js",
-        entryFileNames: "assets/js/[name]-[hash].js",
+        chunkFileNames: "assets/js/[name].[hash].js",
+        entryFileNames: "assets/js/[name].[hash].js",
       },
     },
+    // Оптимизация сборки
+    target: "es2015",
+    polyfillDynamicImport: false,
   },
 
   optimizeDeps: {
