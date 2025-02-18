@@ -6,3 +6,120 @@
   width: 100%;
   margin: 0 auto;
 }
+
+/* Состояние загрузки */
+.loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--primary-color, #333);
+  background-color: var(--background-color, #fff);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.loading::after {
+  content: '';
+  width: 40px;
+  height: 40px;
+  margin-left: 15px;
+  border: 4px solid var(--primary-color, #333);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: loading-spinner 0.8s linear infinite;
+}
+
+@keyframes loading-spinner {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Страница 404 */
+.not-found {
+  min-height: calc(100vh - 200px);
+  /* Высота минус header и footer */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--background-color, #fff);
+}
+
+.not-found h1 {
+  font-size: 8rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1;
+  color: var(--primary-color, #333);
+  animation: scale-in 0.5s ease-out;
+}
+
+.not-found p {
+  font-size: 1.5rem;
+  margin: 1rem 0 2rem;
+  color: var(--text-color, #666);
+}
+
+.back-home {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--primary-color, #333);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.back-home:hover {
+  background-color: var(--primary-hover-color, #444);
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Медиа-запросы */
+@media (max-width: 768px) {
+  .not-found h1 {
+    font-size: 6rem;
+  }
+
+  .not-found p {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .not-found h1 {
+    font-size: 4rem;
+  }
+
+  .not-found p {
+    font-size: 1rem;
+  }
+
+  .back-home {
+    padding: 0.6rem 1.2rem;
+  }
+}

@@ -23,8 +23,13 @@ const NotFound = () => {
 };
 
 function App() {
+  // Используем переменную окружения для basename
+  const basename =
+    import.meta.env.VITE_BASE_URL ||
+    (import.meta.env.MODE === "production" ? "/r32s/" : "/");
+
   return (
-    <Router>
+    <Router basename={basename}>
       <Header />
       <Routes>
         <Route

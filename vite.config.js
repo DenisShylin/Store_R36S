@@ -8,7 +8,7 @@ const __dirname = dirname(__filename);
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: "./", // Изменено с "/" на "./" для относительных путей
+  base: mode === "production" ? "/r32s/" : "/",
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => ({
   assetsInclude: ["**/*.MP4", "**/*.mp4", "**/*.webm", "**/*.gif"],
 
   server: {
-    port: 3000,
+    port: 3001, // Изменим на 3001, чтобы соответствовало текущему запуску
     open: true,
     host: true,
   },
@@ -28,12 +28,11 @@ export default defineConfig(({ mode }) => ({
     assetsDir: "assets",
     minify: "esbuild",
     sourcemap: mode === "development",
-    emptyOutDir: true, // Очистка папки dist перед сборкой
-    cssCodeSplit: true, // Явное разделение CSS
+    emptyOutDir: true,
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
         manualChunks: {
-          // Разделение вендоров на отдельные чанки
           vendor: [
             "react",
             "react-dom",
@@ -43,25 +42,11 @@ export default defineConfig(({ mode }) => ({
             "axios",
           ],
         },
-        assetFileNames: (assetInfo) => {
-          const info = assetInfo.name.split(".");
-          const extType = info[info.length - 1];
-          if (extType === "css") {
-            return `assets/css/[name].[hash][extname]`;
-          }
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            return `assets/images/[name].[hash][extname]`;
-          }
-          if (/mp4|webm/i.test(extType)) {
-            return `assets/videos/[name].[hash][extname]`;
-          }
-          return `assets/[name].[hash][extname]`;
-        },
+        assetFileNames: "assets/[name].[hash][extname]",
         chunkFileNames: "assets/js/[name].[hash].js",
         entryFileNames: "assets/js/[name].[hash].js",
       },
     },
-    // Оптимизация сборки
     target: "es2015",
     polyfillDynamicImport: false,
   },
