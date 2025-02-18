@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./Footer.css";
 import PartnershipModal from "./PartnershipModal/PartnershipModal";
+// Добавляем импорт иконки
+import aliExpressIcon from "/aliexpress.ico";
 
 const Footer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,7 +28,7 @@ const Footer = () => {
                   className="social__link"
                 >
                   <img
-                    src="/AliExpress.ico"
+                    src={aliExpressIcon}
                     alt="AliExpress Store"
                     className="social__icon"
                   />
