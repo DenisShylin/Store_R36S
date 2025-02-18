@@ -118,7 +118,7 @@ const Hero = () => {
 
         <div className="hero__content" ref={titleRef}>
           <h1 className="hero__title">
-            <span className="hero__title-line">Gaming retro</span>
+            <span className="hero__title-line">Gaming Retro</span>
             <span className="hero__title-line">console R36S</span>
           </h1>
           <p className="hero__description">
