@@ -3,7 +3,7 @@ import { Volume2, VolumeX } from "lucide-react";
 import "./Features.css";
 
 // Import video
-import videoFeatures from "/video/video_features_.mp4";
+import videoFeatures from "/video/video_features_.MP4";
 
 const Features = () => {
   const videoRef = useRef(null);

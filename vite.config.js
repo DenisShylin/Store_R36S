@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   publicDir: "public",
-  assetsInclude: ["**/*.mp4", "**/*.webm", "**/*.gif", "**/*.ico"],
+  assetsInclude: ["**/*.MP4", "**/*.mp4", "**/*.webm", "**/*.gif", "**/*.ico"],
 
   server: {
     port: 3001, // Изменим на 3001, чтобы соответствовало текущему запуску

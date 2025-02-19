@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./Categories.css";
 
 // Import video
-import videoCategories from "/video/video_categories_.mp4";
+import videoCategories from "/video/video_categories_.MP4";
 
 const Categories = () => {
   const videoRef = useRef(null);

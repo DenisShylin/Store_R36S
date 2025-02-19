@@ -12,9 +12,9 @@ import untitled3 from "@/assets/img/modal/Untitled_3_1x.jpg";
 import untitled4 from "@/assets/img/modal/Untitled_4_1x.jpg";
 
 // Import videos
-import videoBattery from "/video/video_3_batrey_.mp4";
-import videoModa6 from "/video/video_6_.mp4";
-import videoOption2 from "/video/video_5_option_.mp4";
+import videoBattery from "/video/video_3_batrey_.MP4";
+import videoModa6 from "/video/video_6_.MP4";
+import videoOption2 from "/video/video_5_option_.MP4";
 
 const About = () => {
   const [activeCard, setActiveCard] = useState(null);
