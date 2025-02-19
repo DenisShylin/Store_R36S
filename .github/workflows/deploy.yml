@@ -26,9 +26,10 @@ jobs:
       - name: 📂 Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
+          server: boyhomstore@vs1906.mirohost.net
+          username: boyhom
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
           server-dir: /r32s/
-          dangerous-clean-slate: true
+          protocol: ftps
+          port: 21
