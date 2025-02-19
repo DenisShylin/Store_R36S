@@ -1,4 +1,4 @@
-// src/components/schemas/ProductSchema.jsx
+// Сам компонент
 import PropTypes from "prop-types";
 
 export const ProductSchema = ({ product = {} }) => {
