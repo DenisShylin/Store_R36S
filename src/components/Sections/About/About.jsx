@@ -75,7 +75,7 @@ const About = () => {
           <rect x="2" y="6" width="20" height="12" rx="2"></rect>
         </svg>
       ),
-      title: "Game Collection",
+      title: "Retro Game Collection",
       description: "Get into the game with the r36s portable gaming console.",
       number: "15K+",
       detail: "classic games",
