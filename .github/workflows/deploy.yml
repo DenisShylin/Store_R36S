@@ -1,7 +1,7 @@
 name: Deploy to Hosting
 on:
   push:
-    branches: [main]
+    branches: [main] # или master, в зависимости от названия вашей основной ветки
 
 jobs:
   build-and-deploy:
@@ -26,8 +26,8 @@ jobs:
       - name: 📂 Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp://vs1906.mirohost.net
-          username: boyhom
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
           server-dir: /r32s/
