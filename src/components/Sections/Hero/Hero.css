@@ -171,8 +171,9 @@
     border-color: #32d15f;
     background: rgba(28, 159, 72, 0.15);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 51, 102, 0.2);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(50, 209, 95, 0.2);
+    /* Изменен цвет тени на зеленый */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .hero__button-text {

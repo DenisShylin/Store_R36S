@@ -14,7 +14,7 @@ const Hero = () => {
   });
 
   const desktopDescription =
-    "R36S HANDHELD GAME CONSOLE opens the door to the exciting world of retro gaming, offering an impressive collection of over 15,000 legendary games from different eras and platforms. At its heart is a premium 3.5-inch IPS screen, which renders images with stunning clarity and vibrant color saturation. Dive into a universe of gaming nostalgia with the R36S HANDHELD CONSOLE!";
+    "R36S HANDHELD GAME CONSOLE opens the door to the exciting world of retro gaming, offering an impressive collection of over 15,000 legendary games from different eras and platforms.  Dive into a universe of gaming nostalgia with the R36S HANDHELD CONSOLE!";
   const mobileDescription =
     "R36S HANDHELD GAME CONSOLE - Gaming legends in the palm of your hand";
 
